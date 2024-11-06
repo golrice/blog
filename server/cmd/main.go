@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"github.com/joho/godotenv"
 	"github.com/urfave/cli/v2"
@@ -14,16 +15,25 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	logFilePath := os.Getenv("LOG_FILE_PATH")
-	if logFilePath == "" {
-		log.Fatal("LOG_FILE_PATH not set in .env file")
+	logDir := os.Getenv("LOG_FILE_DIR")
+	if logDir == "" {
+		logDir = "./logs"
 		return
 	}
 
+	if err := os.MkdirAll(logDir, os.ModePerm); err != nil {
+		log.Fatal("Error creating log directory: ", err)
+		return
+	}
+
+	currentTime := time.Now().Format("2006-01-02")
+	logFilePath := fmt.Sprintf("%s/%s.log", logDir, currentTime)
 	file, err := os.OpenFile(logFilePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer file.Close()
+
 	log.SetOutput(file)
 
 	app := &cli.App{
