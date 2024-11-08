@@ -27,6 +27,7 @@ h1 {
 
 .post:hover {
     transform: scale(1.02);
+    cursor: pointer;
 }
 
 .post-title {
@@ -43,4 +44,126 @@ h1 {
 
 .post p {
     margin: 0;
+}
+
+/* 美化 Home 按钮 */
+#btn-home {
+    background-color: #007bff;
+    /* 蓝色背景 */
+    color: #fff;
+    /* 白色文字 */
+    font-size: 1.2em;
+    /* 字体大小 */
+    padding: 10px 20px;
+    margin: 20px 0;
+    /* 上下10px，左右20px的内边距 */
+    border: none;
+    /* 无边框 */
+    border-radius: 5px;
+    /* 圆角 */
+    cursor: pointer;
+    /* 鼠标悬停时显示为手形 */
+    transition: background-color 0.3s, transform 0.2s;
+    /* 背景色和按压效果的过渡 */
+}
+
+/* 鼠标悬停效果 */
+#btn-home:hover {
+    background-color: #0056b3;
+    /* 悬停时改为深蓝色 */
+    transform: scale(1.05);
+    /* 稍微放大 */
+}
+
+/* 按钮点击时的效果 */
+#btn-home:active {
+    background-color: #004085;
+    /* 点击时改为更深的蓝色 */
+    transform: scale(0.98);
+    /* 按下时稍微缩小 */
+}
+
+/* Article 外部容器样式 */
+.article {
+    max-width: 800px;
+    margin: 40px auto;
+    /* 将文章居中 */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* 添加阴影 */
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* 标题样式 */
+.article h2 {
+    font-size: 28px;
+    color: #333;
+    border-bottom: 2px solid #f2f2f2;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* 内容样式 */
+.article-content {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* 设置段落的间距和对齐 */
+.article-content p {
+    margin: 15px 0;
+    text-align: justify;
+}
+
+/* 加强链接的颜色 */
+.article-content a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.article-content a:hover {
+    text-decoration: underline;
+}
+
+/* 图片样式，居中并限制最大宽度 */
+.article-content img {
+    display: block;
+    max-width: 100%;
+    margin: 20px auto;
+    border-radius: 4px;
+}
+
+/* 设置代码块的样式 */
+.article-content pre {
+    background-color: #f8f8f8;
+    border-radius: 4px;
+    padding: 10px;
+    overflow-x: auto;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 20px 0;
+}
+
+.article-content code {
+    background-color: #f1f1f1;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* 列表样式 */
+.article-content ul,
+.article-content ol {
+    margin: 20px 0;
+    padding-left: 20px;
+}
+
+.article-content ul li,
+.article-content ol li {
+    margin: 8px 0;
 }

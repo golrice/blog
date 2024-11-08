@@ -1,0 +1,6 @@
+Hello World!
+
+Example of a test page.
+
+Hello, Everyone! This is a test page.
+This is a test page for the personal blog client.

@@ -1,40 +1,25 @@
+// main.go
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
-	"time"
 
-	"github.com/joho/godotenv"
+	"github.com/golrice/blog/internal/config"
+	"github.com/golrice/blog/internal/logutils"
+	"github.com/golrice/blog/internal/server"
+
 	"github.com/urfave/cli/v2"
 )
 
 func main() {
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	config.LoadEnv()
 
-	logDir := os.Getenv("LOG_FILE_DIR")
-	if logDir == "" {
-		logDir = "./logs"
-		return
-	}
-
-	if err := os.MkdirAll(logDir, os.ModePerm); err != nil {
-		log.Fatal("Error creating log directory: ", err)
-		return
-	}
-
-	currentTime := time.Now().Format("2006-01-02")
-	logFilePath := fmt.Sprintf("%s/%s.log", logDir, currentTime)
-	file, err := os.OpenFile(logFilePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	file, err := logutils.SetupLogging()
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer file.Close()
-
-	log.SetOutput(file)
 
 	app := &cli.App{
 		Name:  "blog-server",
@@ -49,9 +34,9 @@ func main() {
 		},
 		Action: func(c *cli.Context) error {
 			port := c.String("port")
-			fmt.Printf("服务器启动中，监听端口：%s\n", port)
-
+			log.Printf("服务器启动中，监听端口：%s\n", port)
 			log.Printf("服务器正在端口 %s 上运行...\n", port)
+			server.StartServer(port)
 			return nil
 		},
 	}
